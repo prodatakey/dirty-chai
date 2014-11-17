@@ -15,7 +15,7 @@
     "testing"
   ],
   "author": "Joshua Perry <josh@pdk.io>",
-  "license": "BSD",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/prodatakey/dirty-chai/issues"
   },
