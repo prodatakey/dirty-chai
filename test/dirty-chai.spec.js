@@ -59,4 +59,33 @@ describe('dirty chai', function() {
       });
     });
   });
+
+  describe('when plugin creates new property', function() {
+    var stubCalled;
+
+    beforeEach(function() {
+      stubCalled = false;
+
+      chai.use(function(chai, util) {
+        util.addProperty(chai.Assertion.prototype, 'testAssertion', function() { stubCalled = true; console.log('stubCalled'); });
+      });
+    });
+
+    afterEach(function() {
+      chai.use(function(chai) {
+        delete chai.Assertion.prototype.testAssertion;
+      });
+    });
+
+    it('should be converted to a chainable method', function() {
+      var assertion = new chai.Assertion(true);
+      assertion.should.have.a.property('testAssertion').and.should.be.a('function');
+    });
+
+    it('should call assertion', function() {
+      expect(true).to.testAssertion();
+
+      expect(stubCalled).to.be.true();
+    });
+  });
 });
