@@ -31,6 +31,6 @@
     "load-grunt-tasks": "^1.0.0"
   },
   "peerDependencies": {
-    "chai": "< 2"
+    "chai": "<1.10.0 || >1.10.0"
   }
 }
