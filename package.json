@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/prodatakey/dirty-chai",
   "devDependencies": {
-    "chai": "<1.10.0",
+    "chai": "<1.10.0 || >1.10.0 <2",
     "grunt": "^0.4.5",
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-contrib-watch": "^0.6.1",
@@ -31,6 +31,6 @@
     "load-grunt-tasks": "^1.0.0"
   },
   "peerDependencies": {
-    "chai": "<1.10.0"
+    "chai": "<1.10.0 || >1.10.0 <2"
   }
 }
