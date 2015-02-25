@@ -88,20 +88,11 @@ describe('dirty chai', function() {
       });
     });
 
-    it('should convert asserting property to a chainable method', function() {
+    it('should convert property to a chainable method', function() {
       var prop = Object.getOwnPropertyDescriptor(chai.Assertion.prototype, 'neverFail');
       chai.Assertion.prototype.should.have.a.property('neverFail').and.should.be.a('function');
       prop.should.have.property('get').and.be.a('function');
       prop.get.call(new chai.Assertion({})).should.be.a('function');
-    });
-
-    it('should not convert asserting property to a chainable method', function() {
-      var obj = {};
-      var assertion = new chai.Assertion(obj);
-      var prop = Object.getOwnPropertyDescriptor(chai.Assertion.prototype, 'flagelate');
-      chai.Assertion.prototype.should.have.a.property('flagelate').and.should.be.a('function');
-      prop.should.have.property('get').and.be.a('function');
-      prop.get.call(assertion).should.equal(assertion);
     });
 
     it('should call assertion', function() {
