@@ -1,5 +1,18 @@
 'use strict';
 
+var requireUncached = require('require-uncached');
+var chai = requireUncached('chai');
+var expect = chai.expect;
+chai.should();
+
+chai.use(requireUncached('../lib/dirty-chai'));
+
+function shouldFail(func, msg) {
+  it('should fail with a message', function() {
+    expect(func).to.throw(msg);
+  });
+}
+
 describe('dirty chai', function() {
   describe('ok', function() {
     describe('when true expression', function() {
@@ -19,13 +32,16 @@ describe('dirty chai', function() {
           expect(true).to.be.ok.ensure();
           expect(true).to.be.ok.not.ensure();
       });
+
+      it('should work with should', function() {
+        true.should.be.true.and.not.false();
+      });
     });
 
     describe('when false expression', function() {
       it('should assert non-function at chain end', function() {
-        expect(function() {
-          expect(true).to.not.be.ok.and.not.equal(false);
-        }).to.throw(/expected true to be falsy/);
+        var assertion = expect(true).to.not.be.ok.and.not;
+        shouldFail(assertion.equal.bind(assertion, false), /expected true to be falsy/);
       });
 
       it('should assert with custom message at chain end', function() {
@@ -67,23 +83,29 @@ describe('dirty chai', function() {
       stubCalled = false;
 
       chai.use(function(chai, util) {
-        util.addProperty(chai.Assertion.prototype, 'testAssertion', function() { stubCalled = true; console.log('stubCalled'); });
+        chai.Assertion.addProperty('neverFail', function() { this.assert(true === true); stubCalled = true; });
+        chai.Assertion.addProperty('flagelate', function() { util.flag(this, 'legfree', true); });
       });
     });
 
-    afterEach(function() {
-      chai.use(function(chai) {
-        delete chai.Assertion.prototype.testAssertion;
-      });
+    it('should convert asserting property to a chainable method', function() {
+      var prop = Object.getOwnPropertyDescriptor(chai.Assertion.prototype, 'neverFail');
+      chai.Assertion.prototype.should.have.a.property('neverFail').and.should.be.a('function');
+      prop.should.have.property('get').and.be.a('function');
+      prop.get.call(new chai.Assertion({})).should.be.a('function');
     });
 
-    it('should be converted to a chainable method', function() {
-      var assertion = new chai.Assertion(true);
-      assertion.should.have.a.property('testAssertion').and.should.be.a('function');
+    it('should not convert asserting property to a chainable method', function() {
+      var obj = {};
+      var assertion = new chai.Assertion(obj);
+      var prop = Object.getOwnPropertyDescriptor(chai.Assertion.prototype, 'flagelate');
+      chai.Assertion.prototype.should.have.a.property('flagelate').and.should.be.a('function');
+      prop.should.have.property('get').and.be.a('function');
+      prop.get.call(assertion).should.equal(assertion);
     });
 
     it('should call assertion', function() {
-      expect(true).to.testAssertion();
+      expect(true).to.neverFail();
 
       expect(stubCalled).to.be.true();
     });

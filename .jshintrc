@@ -23,6 +23,8 @@
     "describe": true,
     "beforeEach": true,
     "afterEach": true,
+    "before": true,
+    "after": true,
     "it": true,
     "expect": true,
 	"define": true,
