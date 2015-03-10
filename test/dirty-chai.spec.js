@@ -15,6 +15,7 @@ function shouldFail(func, msg) {
 
 describe('dirty chai', function() {
   describe('ok', function() {
+
     describe('when true expression', function() {
       it('should not assert function', function() {
           expect(true).to.be.ok();
@@ -38,6 +39,7 @@ describe('dirty chai', function() {
       });
     });
 
+    
     describe('when false expression', function() {
       it('should assert non-function at chain end', function() {
         var assertion = expect(true).to.not.be.ok.and.not;
@@ -74,6 +76,38 @@ describe('dirty chai', function() {
         }).to.throw(/expected true to be falsy/);
       });
     });
+
+  });
+
+  describe('immutable properties', function() {
+    describe('length', function() {
+      it('should successfully assert length early in the chain', function() {
+        [1].should.have.length(1);
+      });
+
+      it('should assert wrong length', function() {
+        expect(function() {
+          [1, 1, 2, 3, 5].should.have.length(33);
+        }).to.throw();
+      });
+    });
+
+    describe('arguments', function() {
+      it('should successfully assert arguments early in the chain', function() {
+        function testFunc() {
+          arguments.should.be.arguments();
+        }
+        testFunc('Err, param!');
+      });
+
+      it('should assert on non-arguments', function() {
+        expect(function() {
+          var o = {};
+          o.should.be.arguments();
+        }).to.throw();
+      });
+    });
+
   });
 
   describe('when plugin creates new property', function() {
