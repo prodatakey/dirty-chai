@@ -3,7 +3,7 @@
 var requireUncached = require('require-uncached');
 var chai = requireUncached('chai');
 var expect = chai.expect;
-chai.should();
+var should = chai.should();
 
 chai.use(requireUncached('../lib/dirty-chai'));
 
@@ -14,6 +14,58 @@ function shouldFail(func, msg) {
 }
 
 describe('dirty chai', function() {
+  describe('should', function() {
+    describe('when empty object', function() {
+      it('should.exist() should not assert', function() {
+        should.exist({});
+      });
+
+      it('should.not.exist() should assert', function() {
+        expect(function() {
+          should.not.exist({});
+        }).to.throw(/expected {} to not exist/);
+      });
+    });
+
+    describe('when null', function() {
+      it('should.not.exist() should not assert', function() {
+        should.not.exist(null);
+      });
+
+      it('should.exist() should assert', function() {
+        expect(function() {
+          should.exist(null);
+        }).to.throw(/expected null to exist/);
+      });
+    });
+  });
+
+  describe('expect', function() {
+    describe('when empty object', function() {
+      it('should.exist() should not assert', function() {
+        expect({}).to.exist();
+      });
+
+      it('should.not.exist() should assert', function() {
+        expect(function() {
+          expect({}).to.not.exist();
+        }).to.throw(/expected {} to not exist/);
+      });
+    });
+
+    describe('when null', function() {
+      it('should.not.exist() should not assert', function() {
+        expect(null).to.not.exist();
+      });
+
+      it('should.exist() should assert', function() {
+        expect(function() {
+          expect(null).to.exist();
+        }).to.throw(/expected null to exist/);
+      });
+    });
+  });
+
   describe('ok', function() {
 
     describe('when true expression', function() {
