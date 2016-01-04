@@ -24,8 +24,10 @@ expect(true).to.be.true();
 
 With this function form for terminating properties you can also provide custom error messages to show when the assertion fails. This works whether the assertion is somewhere mid-chain or at the end.
 
-    expect(true).to.be.true.and.not.false('Reason: Paradox');
-    expect(true).to.be.true('The fabric of logic has torn').and.not.false();
+```js
+expect(true).to.be.true.and.not.false('Reason: Paradox');
+expect(true).to.be.true('The fabric of logic has torn').and.not.false();
+```
 
 ## Affected Assertions
 
@@ -45,11 +47,13 @@ The following built-in assertions are modified by this plugin to now use the fun
 
 This breaks both the `length` and `arguments` asserts when they are in the chain following any other assertion. To work around this limitation, do the `length` or `arguments` asserts first in the chain or just do multiple assertion statements.
 
-    myArray.should.exist.and.should.have.length(3); // Error: length is not a function
+```js
+myArray.should.exist.and.should.have.length(3); // Error: length is not a function
 
-    // Do two assert statements instead
-    myArray.should.exist();
-	myArray.should.have.length(3);
+// Do two assert statements instead
+myArray.should.exist();
+myArray.should.have.length(3);
+```
 
 ## Plugin Assertions
 
@@ -57,9 +61,11 @@ This plugin will also hook and convert any property assertions added by other Ch
 
 For example, if you load [sinon-chai](https://github.com/domenic/sinon-chai) after dirty-chai, all of its property assertions will now be method assertions.
 
-    spy.should.have.been.called();
-    spy.should.have.been.calledOnce();
-    spy.should.have.been.calledTwice();
+```js
+spy.should.have.been.called();
+spy.should.have.been.calledOnce();
+spy.should.have.been.calledTwice();
+```
 
 ## Why?
 
@@ -77,15 +83,21 @@ This plugin was written so that we can still take advantage of the large ecosyst
 
 The below list of built-in assertions, and many assertions added by plugins, are property getters that assert immediately on access. Because of that, they were written to be used by terminating the assertion chain with a property access.
 
-    expect(true).to.be.true;
-    foo.should.be.ok;
+```js
+expect(true).to.be.true;
+foo.should.be.ok;
+````
 
 A better option was to provide a function-call form for these assertions so that the code's intent is more clear and the linters stop complaining about something looking off. This form is added in addition to the existing property access form and does not impact existing test code.
 
-    expect(true).to.be.true();
-    foo.should.be.ok();
+```js
+expect(true).to.be.true();
+foo.should.be.ok();
+```
 
 These forms can also be mixed, but the chain must always be terminated in the function form or assertions up to that point in the chain will not execute.
 
-    expect(true).to.be.true.and.not.false();
-    expect(true).to.be.true().and.not.false();
+```js
+expect(true).to.be.true.and.not.false();
+expect(true).to.be.true().and.not.false();
+```
