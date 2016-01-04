@@ -1,4 +1,68 @@
-### Function Form for Terminating Assertion Properties
+dirty-chai
+==========
+Function form for terminating assertion properties.
+
+## Install
+```
+npm install dirty-chai --save-dev
+```
+## Usage
+
+`dirty-chai` is a chai [plugin](http://chaijs.com/plugins).
+
+```js
+var chai = require('chai');
+var dirtyChai = require('dirty-chai');
+var expect = chai.expect
+
+chai.use(dirtyChai);
+// ...
+expect(true).to.be.true();
+```
+
+## Custom Error Messages
+
+With this function form for terminating properties you can also provide custom error messages to show when the assertion fails. This works whether the assertion is somewhere mid-chain or at the end.
+
+    expect(true).to.be.true.and.not.false('Reason: Paradox');
+    expect(true).to.be.true('The fabric of logic has torn').and.not.false();
+
+## Affected Assertions
+
+The following built-in assertions are modified by this plugin to now use the function-call form:
+
+* ok
+* true
+* false
+* null
+* undefined
+* exist
+* empty
+* arguments
+* Arguments
+
+## Caveats
+
+This breaks both the `length` and `arguments` asserts when they are in the chain following any other assertion. To work around this limitation, do the `length` or `arguments` asserts first in the chain or just do multiple assertion statements.
+
+    myArray.should.exist.and.should.have.length(3); // Error: length is not a function
+
+    // Do two assert statements instead
+    myArray.should.exist();
+	myArray.should.have.length(3);
+
+## Plugin Assertions
+
+This plugin will also hook and convert any property assertions added by other Chai plugins. The only thing you need to do is make sure to load dirty-chai before any other plugins so that it can get its hooks in place before the other plugins are loaded.
+
+For example, if you load [sinon-chai](https://github.com/domenic/sinon-chai) after dirty-chai, all of its property assertions will now be method assertions.
+
+    spy.should.have.been.called();
+    spy.should.have.been.calledOnce();
+    spy.should.have.been.calledTwice();
+
+## Why?
+
 [Chai](https://github.com/chaijs/chai) is probably one of the most popular assertion libraries in the node. It has over 400 dependents and is downloaded almost 500,000/month. 
 
 It was frequently used to write tests in CoffeeScript and so, for stylistic reasons, it was designed so that any assertions that did not require parameters would simply assert on property access. This allowed those assertions to elide the empty parens that would be required if those assertions were methods.
@@ -25,44 +89,3 @@ These forms can also be mixed, but the chain must always be terminated in the fu
 
     expect(true).to.be.true.and.not.false();
     expect(true).to.be.true().and.not.false();
-
-#### Custom Error Messages
-
-With this function form for terminating properties you can also provide custom error messages to show when the assertion fails. This works whether the assertion is somewhere mid-chain or at the end.
-
-    expect(true).to.be.true.and.not.false('Reason: Paradox');
-    expect(true).to.be.true('The fabric of logic has torn').and.not.false();
-
-#### Affected Assertions
-
-The following built-in assertions are modified by this plugin to now use the function-call form:
-
-* ok
-* true
-* false
-* null
-* undefined
-* exist
-* empty
-* arguments
-* Arguments
-
-#### Caveats
-
-This breaks both the `length` and `arguments` asserts when they are in the chain following any other assertion. To work around this limitation, do the `length` or `arguments` asserts first in the chain or just do multiple assertion statements.
-
-    myArray.should.exist.and.should.have.length(3); // Error: length is not a function
-
-    // Do two assert statements instead
-    myArray.should.exist();
-	myArray.should.have.length(3);
-
-#### Plugin Assertions
-
-This plugin will also hook and convert any property assertions added by other Chai plugins. The only thing you need to do is make sure to load dirty-chai before any other plugins so that it can get its hooks in place before the other plugins are loaded.
-
-For example, if you load [sinon-chai](https://github.com/domenic/sinon-chai) after dirty-chai, all of its property assertions will now be method assertions.
-
-    spy.should.have.been.called();
-    spy.should.have.been.calledOnce();
-    spy.should.have.been.calledTwice();
