@@ -45,6 +45,17 @@ The following built-in assertions are modified by this plugin to now use the fun
 
 ## Caveats
 
+**Always terminate with a function**
+
+These forms can also be mixed, but the chain must always be terminated in the function form or assertions up to that point in the chain will not execute.
+
+```js
+expect(true).to.be.true.and.not.false();
+expect(true).to.be.true().and.not.false();
+```
+
+**Chaining length/arguments**
+
 This breaks both the `length` and `arguments` asserts when they are in the chain following any other assertion. To work around this limitation, do the `length` or `arguments` asserts first in the chain or just do multiple assertion statements.
 
 ```js
@@ -93,11 +104,4 @@ A better option was to provide a function-call form for these assertions so that
 ```js
 expect(true).to.be.true();
 foo.should.be.ok();
-```
-
-These forms can also be mixed, but the chain must always be terminated in the function form or assertions up to that point in the chain will not execute.
-
-```js
-expect(true).to.be.true.and.not.false();
-expect(true).to.be.true().and.not.false();
 ```
