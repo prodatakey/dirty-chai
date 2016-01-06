@@ -92,7 +92,7 @@ Squelching these errors is not a good solution as test code is getting to be jus
 
 This plugin was written so that we can still take advantage of the large ecosystem of projects and plugins written with/for Chai, while still being able to trust your tests. It converts the built-in property assertions to method assertions, including any property assertions added by plugins.
 
-The below list of built-in assertions, and many assertions added by plugins, are property getters that assert immediately on access. Because of that, they were written to be used by terminating the assertion chain with a property access.
+The list of affected assertions, and many assertions added by plugins, are property getters that assert immediately on access. Because of that, they were written to be used by terminating the assertion chain with a property access.
 
 ```js
 expect(true).to.be.true;
