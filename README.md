@@ -82,7 +82,7 @@ spy.should.have.been.calledTwice();
 
 [Chai](https://github.com/chaijs/chai) is probably one of the most popular assertion libraries in the node. It has over 400 dependents and is downloaded almost 500,000/month. 
 
-It was frequently used to write tests in CoffeeScript and so, for stylistic reasons, it was designed so that any assertions that did not require parameters would simply assert on property access. This allowed those assertions to elide the empty parens that would be required if those assertions were methods.
+For stylistic reasons, Chai was designed so that any assertions that did not require parameters would simply assert on property access. This allowed those assertions to elide the empty parens that would be required if those assertions were methods.
 
 This design decision has a pretty big impact on how much trust you can place in your tests, especially if you don't adhere strictly to TDD's red-green-refactor flow. For a detailed descent into why, read [Beware of libraries that assert on property access](https://github.com/moll/js-must#asserting-on-property-access).
 
