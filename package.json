@@ -12,6 +12,8 @@
   },
   "keywords": [
     "chai",
+    "chai-plugin",
+    "browser",
     "testing"
   ],
   "author": "Joshua Perry <josh@pdk.io>",
