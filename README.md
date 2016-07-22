@@ -66,6 +66,20 @@ myArray.should.exist();
 myArray.should.have.length(3);
 ```
 
+** use with chai-as-promised **
+
+If you're using chai-as-promised, you should `.use` chai-as-promised before dirty-chai:
+
+```js
+var chai = require("chai");
+var chaiAsPromised = require("chai-as-promised");
+var dirtyChai = requrie("dirty-chai");
+
+
+chai.use(chaiAsPromised);
+chai.use(dirtyChai);
+```
+
 ## Plugin Assertions
 
 This plugin will also hook and convert any property assertions added by other Chai plugins. The only thing you need to do is make sure to load dirty-chai before any other plugins so that it can get its hooks in place before the other plugins are loaded.
