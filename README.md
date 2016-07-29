@@ -73,7 +73,7 @@ If you're using chai-as-promised, you should `.use` chai-as-promised before dirt
 ```js
 var chai = require("chai");
 var chaiAsPromised = require("chai-as-promised");
-var dirtyChai = requrie("dirty-chai");
+var dirtyChai = require("dirty-chai");
 
 
 chai.use(chaiAsPromised);
