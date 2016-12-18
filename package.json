@@ -23,20 +23,21 @@
   },
   "homepage": "https://github.com/prodatakey/dirty-chai",
   "devDependencies": {
-    "chai": "<1.10.0 || >1.10.0 <4",
-    "chai-as-promised": ">4.2.0 <6",
-    "es6-promise": "^2.0.1",
-    "grunt": "^0.4.5",
-    "grunt-contrib-jshint": "^0.10.0",
-    "grunt-contrib-watch": "^0.6.1",
-    "grunt-mocha-test": "^0.12.2",
-    "jshint": "^2.5.10",
-    "jshint-stylish": "^1.0.0",
-    "load-grunt-tasks": "^1.0.0",
+    "chai": "^4.0.0",
+    "chai-as-promised": "^7.0.0",
+    "es6-promise": "^4.0.0",
+    "grunt": "^1.0.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-mocha-test": "^0.13.0",
+    "jshint": "^2.9.0",
+    "jshint-stylish": "^2.0.0",
+    "load-grunt-tasks": "^3.0.0",
+    "mocha": "^3.4.2",
     "require-uncached": "^1.0.2"
   },
   "peerDependencies": {
-    "chai": "<1.10.0 || >1.10.0 <4"
+    "chai": ">=2.2.1 <5"
   },
   "dependencies": {}
 }

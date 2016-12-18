@@ -14,7 +14,8 @@ module.exports = function (grunt) {
     jshint: {
       options: {
         jshintrc: '.jshintrc',
-        reporter: require('jshint-stylish')
+        reporter: require('jshint-stylish'),
+        reporterOutput: ''
       },
       all: '{lib,test}/**/*.js'
     },
@@ -31,5 +32,5 @@ module.exports = function (grunt) {
 
   grunt.registerTask('dev', ['watch']);
   grunt.registerTask('test', ['mochaTest']);
-  grunt.registerTask('ci', ['jshint', 'mochaTest']);
+  grunt.registerTask('ci', ['jshint:all', 'mochaTest']);
 };

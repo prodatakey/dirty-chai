@@ -43,7 +43,9 @@ describe('dirty chai', function() {
     describe('when false expression', function() {
       it('should assert non-function at chain end', function() {
         var assertion = expect(true).to.not.be.ok.and.not;
-        shouldFail(assertion.equal.bind(assertion, false), /expected true to be falsy/);
+        shouldFail(function () {
+          assertion.equal.call(assertion, false);
+        }, /expected true to be falsy/);
       });
 
       it('should assert with custom message at chain end', function() {
@@ -124,9 +126,9 @@ describe('dirty chai', function() {
 
     it('should convert property to a chainable method', function() {
       var prop = Object.getOwnPropertyDescriptor(chai.Assertion.prototype, 'neverFail');
-      chai.Assertion.prototype.should.have.a.property('neverFail').and.should.be.a('function');
+      (new chai.Assertion({})).should.have.a.property('neverFail').and.be.a('function');
       prop.should.have.property('get').and.be.a('function');
-      prop.get.call(new chai.Assertion({})).should.be.a('function');
+      ((new chai.Assertion({}).neverFail)).should.be.a('function');
     });
 
     it('should call assertion', function() {
