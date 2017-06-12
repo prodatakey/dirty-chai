@@ -8,7 +8,7 @@ env:
   - CHAI_VERSION=^4.0.0
 before_install:
     npm install -g grunt-cli
-after_install:
+before_script:
     npm install chai@$CHAI_VERSION
 script:
     grunt ci
