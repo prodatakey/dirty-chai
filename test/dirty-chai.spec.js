@@ -5,6 +5,7 @@ var chai = requireUncached('chai');
 var expect = chai.expect;
 chai.should();
 
+chai.use(require('chai-as-promised'));
 chai.use(requireUncached('../lib/dirty-chai'));
 
 function shouldFail(func, msg) {
@@ -135,6 +136,20 @@ describe('dirty chai', function() {
       expect(true).to.neverFail();
 
       expect(stubCalled).to.be.true();
+    });
+  });
+
+  describe('compatibility with chai-as-promised', function() {
+    it('should pass with resolved promise', function() {
+      return expect(Promise.resolve(true)).to.eventually.be.true();
+    });
+
+    it('should pass with rejected promise', function() {
+      var err = new Error('foo');
+      err.name = 'bar';
+      return expect(Promise.reject(err)).to.eventually
+        .be.rejectedWith(Error)
+        .and.to.have.property('name', 'bar');
     });
   });
 });
