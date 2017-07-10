@@ -1,5 +1,7 @@
 dirty-chai
 ==========
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/prodatakey/dirty-chai.svg)](https://greenkeeper.io/)
 Function form for terminating assertion properties.
 
 ## Install
