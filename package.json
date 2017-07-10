@@ -1,6 +1,6 @@
 {
   "name": "dirty-chai",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Extends Chai with lint-friendly terminating assertions.",
   "main": "./lib/dirty-chai.js",
   "scripts": {
