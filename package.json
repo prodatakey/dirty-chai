@@ -27,7 +27,7 @@
     "chai-as-promised": "^7.0.0",
     "es6-promise": "^4.0.0",
     "grunt": "^1.0.0",
-    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-jshint": "^2.0.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-mocha-test": "^0.13.0",
     "jshint": "^2.9.0",
