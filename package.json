@@ -4,7 +4,11 @@
   "description": "Extends Chai with lint-friendly terminating assertions.",
   "main": "./lib/dirty-chai.js",
   "scripts": {
-    "test": "grunt test"
+    "lint": "standard",
+    "test": "run-s test:*",
+    "test:node": "mocha",
+    "test:chrome": "pw-test test/dirty-chai.spec.js",
+    "test:firefox": "pw-test test/dirty-chai.spec.js -b firefox"
   },
   "repository": {
     "type": "git",
@@ -25,19 +29,9 @@
   "devDependencies": {
     "chai": "^4.0.0",
     "chai-as-promised": "^7.0.0",
-    "es6-promise": "^4.0.0",
-    "grunt": "^1.0.0",
-    "grunt-contrib-jshint": "^1.0.0",
-    "grunt-contrib-watch": "^1.0.0",
-    "grunt-mocha-test": "^0.13.0",
-    "jshint": "^2.9.0",
-    "jshint-stylish": "^2.0.0",
-    "load-grunt-tasks": "^3.0.0",
-    "mocha": "^3.4.2",
-    "require-uncached": "^1.0.2"
-  },
-  "peerDependencies": {
-    "chai": ">=2.2.1 <5"
-  },
-  "dependencies": {}
+    "mocha": "^8.3.2",
+    "npm-run-all": "^4.1.5",
+    "playwright-test": "^3.0.5",
+    "standard": "^16.0.3"
+  }
 }
